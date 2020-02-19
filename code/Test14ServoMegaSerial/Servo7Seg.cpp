@@ -53,13 +53,13 @@ Servo *mServo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG];
 #pragma region test servoInfo
 servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
   {
-    {2,90,180},
-    {3,90,180},
-    {4,90,180},
-    {5,90,180},
-    {6,90,180},
-    {7,90,180},
-    {8,90,180}
+    {2,90,180},//1
+    {3,90,180},//2
+    {4,90,180},//3
+    {5,80,15},//4
+    {6,90,175}, //5
+    {7,90,180},//6
+    {8,90, 0}//7
   },
 
   {

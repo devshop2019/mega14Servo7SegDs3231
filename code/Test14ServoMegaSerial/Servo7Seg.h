@@ -3,8 +3,13 @@
 #include "arduino.h"
 #include <Servo.h>
 
-#define MAX_NUMSERVO7SEG    7
-#define MAX_NUM_7SEG        2
+#define MAX_NUMSERVO7SEG      7
+#define MAX_NUM_7SEG          2
+
+#define MID_SEG_SERVO_ID_7    (6)
+#define MID_SEG_SERVO_ID_1    (0)
+#define MID_SEG_SERVO_ID_5    (4)
+#define MID_SEG_MOVE_POS      (15)
 
 /*
               6
