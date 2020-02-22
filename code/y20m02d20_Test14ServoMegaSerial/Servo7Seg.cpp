@@ -51,7 +51,7 @@ Servo *mServo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG];
 //   }
 // };
 #pragma region test servoInfo
-servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
+const servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
   {
     //pin,onPos,offPos
     {2,90,180},//1
@@ -60,17 +60,17 @@ servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
     {5,80,15},//4
     {6,90,175}, //5
     {7,90,180},//6
-    {8,90, 0}//7
+    {8,90, 180}//7
   },
 
   {
-    {37,90,180},
-    {39,90,180},
-    {41,90,180},
-    {43,90,180},
-    {45,90,180},
-    {47,90,180},
-    {49,90,180}
+    {A0,90,180},//1
+    {A1,90,180},//2
+    {A2,90,0}, //3
+    {A3,90,0}, //4
+    {A4,90,0}, //5
+    {A5,90,180},//6
+    {11,90,0}//7
   }
 };
 
@@ -84,6 +84,17 @@ void SetUpPinServo(){
             mServo[cled][cf]->attach(servoInfo[cled][cf].pin);
         }
     }
+}
+
+void SetUpPinServo(servoPinInfo servoInfo_[MAX_NUM_7SEG][MAX_NUMSERVO7SEG]){
+  for(int cled = 0; cled < MAX_NUM_7SEG; cled++){
+      for(uint8_t cf = 0; cf < MAX_NUMSERVO7SEG; cf++){
+        if(servoInfo_[cled][cf].pin <=1) continue;
+        if(mServo[cled][cf]) delete mServo[cf];
+        mServo[cled][cf] = new Servo;
+        mServo[cled][cf]->attach(servoInfo_[cled][cf].pin);
+      }
+  }
 }
 
 void testServo7SegWithSegID(int _ledSegId_){

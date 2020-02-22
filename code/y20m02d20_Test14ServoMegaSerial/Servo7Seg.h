@@ -3,8 +3,9 @@
 #include "arduino.h"
 #include <Servo.h>
 
+#define MAX_NUM_7SEG          4
+
 #define MAX_NUMSERVO7SEG      7
-#define MAX_NUM_7SEG          2
 
 #define MID_SEG_SERVO_ID_7    (6)
 #define MID_SEG_SERVO_ID_1    (0)
@@ -15,11 +16,11 @@
               6
           --------
       1 /         / 5
-      /    7     /
+       /    7    /
         --------
-    2/         / 4
-    /         /
-      --------
+  2 /         / 4
+   /         /
+   --------
         3
 */
 extern const uint8_t tempalteServo7SegPosNumber[];
@@ -46,9 +47,10 @@ typedef struct{
 }servoPinInfo;
 
 extern Servo *mServo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG];
-extern servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG];
+extern const servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG];
 
 extern void SetUpPinServo();
+void SetUpPinServo(servoPinInfo servoInfo_[MAX_NUM_7SEG][MAX_NUMSERVO7SEG]);
 extern void testServo7SegWithSegID(int _ledSegId_);
 
 #endif

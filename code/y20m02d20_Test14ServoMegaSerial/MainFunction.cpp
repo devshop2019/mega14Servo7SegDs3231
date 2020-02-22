@@ -33,4 +33,3 @@ String splitString2(String v_G_motherString, String v_G_Command, String v_G_Star
     return v_G_motherString.substring(PosOfStartSymbol+1);
   }
 }
-
