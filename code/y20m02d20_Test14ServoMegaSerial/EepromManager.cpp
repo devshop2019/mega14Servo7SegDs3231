@@ -25,8 +25,8 @@ void LoadEeprom_ServoInfo(){
     Serial.print("data Size: " + String(sizeof(servoInfo)));
     Serial.print(" Eep state s: " + String(myLed7Seg2.saveState));
     Serial.print(" Eep state d: " + String(currentLed7SegServo.saveState));
-    Serial.print(" Eep data s: " + String(servoInfo[0][6].pin));
-    Serial.println(" Eep data d: " + String(currentLed7SegServo.servoInfo[0][6].pin));
+    Serial.print(" Eep data s: " + String(servoInfo[1][6].pin));
+    Serial.println(" Eep data d: " + String(currentLed7SegServo.servoInfo[1][6].pin));
 }
 
 void SaveEeprom_ServoInfo(){
@@ -40,7 +40,7 @@ void PrintEeprom_ServoInfo(Stream* _printer_){
     _printer_->println(F("const servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {"));
     for(int cled = 0; cled < MAX_NUM_7SEG; cled++){
         _printer_->print(F("\t{\t//LedID "));
-        _printer_->println(cled);
+        _printer_->println(cled + 1);
         _printer_->println(F("\t\t//pin\t\tonPos\t\toffPos"));
         // _printer_->println(cled);
         for(uint8_t cf = 0; cf < MAX_NUMSERVO7SEG; cf++){

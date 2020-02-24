@@ -2,6 +2,7 @@
 #include "Servo7Seg.h"
 #include "MainFunction.h"
 #include "EepromManager.h"
+#include "CommandLine.h"
 
 void setup() {
   // put your setup code here, to run once:
@@ -18,7 +19,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   ReadSerial();
-  runTestCount();
+  // runTestCount();
   // WriteLedWithNumber(0,8);
   // WriteLedWithNumber(1,8);
   // delay(3000);
@@ -27,16 +28,18 @@ void loop() {
 void ReadSerial(){
   if(Serial.available()){
     String kk = Serial.readStringUntil('\n');
-    Serial.print(kk);
-    Serial.print("\t");
-    Serial.println(GET_VALUE_FROM_NUM(kk.toInt()), BIN);
+    Serial.println(kk);
+    // Serial.print("\t");
+    // Serial.println(GET_VALUE_FROM_NUM(kk.toInt()), BIN);
 
-    Serial.print(splitString2(kk,"ttrr",",",",",0) + "\t");
-    Serial.print(splitString2(kk,"ttrr",",",",",1) + "\t");
-    Serial.println(splitString2(kk,"ttrr",",","",2) + "\t");
+    // Serial.print(splitString2(kk,"ttrr",",",",",0) + "\t");
+    // Serial.print(splitString2(kk,"ttrr",",",",",1) + "\t");
+    // Serial.println(splitString2(kk,"ttrr",",","",2) + "\t");
+
+    CheckCommand(kk);
 
     // testServo7SegWithSegID(kk);
-    WriteLedWithNumber(1,kk.toInt());
+    // WriteLedWithNumber(1,kk.toInt());
   }
 }
 
@@ -52,7 +55,6 @@ void WriteLedWithNumber(uint8_t _ledId_, uint8_t _value_){
     }else{
       mServo[_ledId_][cf]->write(servoInfo[_ledId_][cf].offPos);
     }
-    // servoInfo[_ledId_][cf].oldBit = temBit;
   }
 }
 

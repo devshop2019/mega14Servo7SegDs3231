@@ -2,12 +2,13 @@
     Kich ban:
     1/ Nguyen ly hoat dong:
         - bat dau ct se check Epprom xem servoInfo duoc set chua, neu chua se dung servoInfo khai bao mac dinh.
-        - Dung Serial Commandline chon mode hoat dong: <RUNMODE,SETUP,>
+        - Dung Serial Commandline chon mode hoat dong: <RUNMODE,SETUP,> <HELP?>
             + Mode SETUP: setup Servo
-                ++ Set onPos :      <SETONPOS,LED_ID,SEG_ID,value,>  ex: SETONPOS,0,4,90,  // set onPos choLed 0(0~3), doan 4(1~7), goc 90(0~180)
+                ++ Set onPos :      <SETONPOS,LED_ID,SEG_ID,value,>  ex: SETONPOS,0,4,90,  // set onPos cho Led 0(0~3), doan 4(1~7), goc 90(0~180)
                 ++ Set offPos:      <SETOFFPOS,LED_ID,SEG_ID,value,>  ex: SETOFFPOS,0,4,70,  // set offPos choLed dau tien, doan 4, goc 70(0~180)
-                ++ Set pin:         <SETPIN,LED_ID,pinvalue,>
+                ++ Set pin:         <SETPIN,LED_ID,SEG_ID,pinvalue,>
                 ++ Save Epprom:     <SAVE_SERVO_INFO,>
+                ++ Reset Epprom:     <RESET_SERVO_INFO,>
                 ++ Print Servo info:<PRINT_INFO,>
                 ++ Run test servo:  <RUN,LED_ID,SEG_ID,STATE,>         ex: RUN,0,4,1 hoặc RUN,0,4,0,  // chay Led thu 0(max 4), doan 4(1~7), len hoac xuong (1|0)
                 ++ Set led value:   <SETLEDVALUE,LED_ID,NUMBER,>       // set so NUMBER(0-9) de led thu LED_ID(0~3) hien thi

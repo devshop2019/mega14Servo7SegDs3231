@@ -70,7 +70,7 @@ const servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
     {A3,90,0}, //4
     {A4,90,0}, //5
     {A5,90,180},//6
-    {11,90,0}//7
+    {10,90,0}//7
   }
 };
 
