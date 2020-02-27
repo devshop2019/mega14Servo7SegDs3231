@@ -10,17 +10,11 @@ void ResetEeprom_ServoInfo(){
 }
 
 void LoadEeprom_ServoInfo(){
-    // myLed7Seg2.saveState = _INFO_STATE_UNSAVE_;
-    // memcpy(&myLed7Seg2.servoInfo, &servoInfo, sizeof(servoInfo));
-    // EEPROM.put(SERVO_LED_INFO_ADDR, myLed7Seg2);
-
     // get data Servo from Eeprom
     EEPROM.get(SERVO_LED_INFO_ADDR, currentLed7SegServo);
-    if(currentLed7SegServo.saveState == _INFO_STATE_UNSAVE_){
+    if(currentLed7SegServo.saveState != _INFO_STATE_SAVE_){
         memcpy(&currentLed7SegServo.servoInfo, &servoInfo, sizeof(servoInfo));
     }else;
-
-    
 
     Serial.print("data Size: " + String(sizeof(servoInfo)));
     Serial.print(" Eep state s: " + String(myLed7Seg2.saveState));

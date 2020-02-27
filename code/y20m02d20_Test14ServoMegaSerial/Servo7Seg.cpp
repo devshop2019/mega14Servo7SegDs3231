@@ -1,4 +1,5 @@
 #include "Servo7Seg.h"
+#include "EepromManager.h"
 
 const uint8_t tempalteServo7SegPosNumber[] = {
                                             0b1111110,//0
@@ -87,6 +88,7 @@ void SetUpPinServo(){
 }
 
 void SetUpPinServo(servoPinInfo servoInfo_[MAX_NUM_7SEG][MAX_NUMSERVO7SEG]){
+  LoadEeprom_ServoInfo();
   for(int cled = 0; cled < MAX_NUM_7SEG; cled++){
       for(uint8_t cf = 0; cf < MAX_NUMSERVO7SEG; cf++){
         if(servoInfo_[cled][cf].pin <=1) continue;
@@ -107,4 +109,20 @@ void testServo7SegWithSegID(int _ledSegId_){
         }
       }
     }
+}
+
+void WriteLedWithNumber(uint8_t _ledId_, uint8_t _value_){
+  uint8_t temValue = GET_VALUE_FROM_NUM(_value_);
+  uint8_t temLedID = _ledId_ - 1;
+
+  for(uint8_t cf = 0; cf < MAX_NUMSERVO7SEG; cf++){
+    uint8_t temBit = bitRead(temValue,(MAX_NUMSERVO7SEG - 1) - cf);
+    bool temFlag = false;
+
+    if(temBit){
+      mServo[temLedID][cf]->write(currentLed7SegServo.servoInfo[temLedID][cf].onPos);
+    }else{
+      mServo[temLedID][cf]->write(currentLed7SegServo.servoInfo[temLedID][cf].offPos);
+    }
+  }
 }
