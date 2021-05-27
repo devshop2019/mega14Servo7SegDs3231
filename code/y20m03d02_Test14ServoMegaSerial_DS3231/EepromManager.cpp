@@ -5,6 +5,9 @@ servoLedEepromStruct myLed7Seg, myLed7Seg2, currentLed7SegServo;
 void ResetEeprom_ServoInfo(){
     servoLedEepromStruct temLed;
     EEPROM.get(SERVO_LED_INFO_ADDR, temLed);
+    if(temLed.saveState == _INFO_STATE_UNSAVE_){
+        return;
+    }
     temLed.saveState = _INFO_STATE_UNSAVE_;
     EEPROM.put(SERVO_LED_INFO_ADDR, temLed);
 }

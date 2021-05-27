@@ -69,9 +69,9 @@ const servoPinInfo servoInfo[MAX_NUM_7SEG][MAX_NUMSERVO7SEG] = {
     {A1,90,180},//2
     {A2,90,0}, //3
     {A3,90,0}, //4
-    {A4,90,0}, //5
-    {A5,90,180},//6
-    {10,90,0}//7
+    {10,90,0}, //5
+    {11,90,180},//6
+    {12,90,0}//7
   }
 };
 
@@ -91,10 +91,13 @@ void SetUpPinServo(servoPinInfo servoInfo_[MAX_NUM_7SEG][MAX_NUMSERVO7SEG]){
   LoadEeprom_ServoInfo();
   for(int cled = 0; cled < MAX_NUM_7SEG; cled++){
       for(uint8_t cf = 0; cf < MAX_NUMSERVO7SEG; cf++){
-        if(servoInfo_[cled][cf].pin <=1) continue;
+        if(servoInfo_[cled][cf].pin <=2) continue;
+        if(servoInfo_[cled][cf].pin >=57) continue;
         if(mServo[cled][cf]) delete mServo[cf];
         mServo[cled][cf] = new Servo;
+        int pintt = servoInfo_[cled][cf].pin;
         mServo[cled][cf]->attach(servoInfo_[cled][cf].pin);
+        Serial.println(pintt);
       }
   }
 }

@@ -156,30 +156,12 @@ void EnRunTestCount(String _ttstring_, int _idcommand_, Stream *p_printer___){
     runTestCount_Flag = !runTestCount_Flag;
 }
 
-void CheckCommand(String _commands_){
-    for(int ccm = 0; ccm < _END_COMMAND_ID_; ccm++){
-        String temStr = splitString2(_commands_, myCommand[ccm].commandString,",", ",",0);
-        String temStr2 = splitString2(_commands_, myCommand[ccm].commandString,"", "",0);
-        String temComandStr = myCommand[ccm].commandString;
-        SPLIT_STR_DB();
-
-        if((temStr == temComandStr) || (temStr2 == temComandStr)){
-            if(myCommand[ccm].RunFunction) myCommand[ccm].RunFunction(_commands_, ccm, &Serial);
-            SPLIT_STR_DB();
-            break;
-        }
-    }
-
-    
-}
-
 void CheckCommand(String _commands_, Stream * p_printer___){
     for(int ccm = 0; ccm < _END_COMMAND_ID_; ccm++){
         String temStr = splitString2(_commands_, myCommand[ccm].commandString,",", ",",0);
         String temStr2 = splitString2(_commands_, myCommand[ccm].commandString,"\r", "",0);
         String temComandStr = myCommand[ccm].commandString;
-        SPLIT_STR_DB_V(temStr);
-        SPLIT_STR_DB_V(temStr2);
+        
         if((temStr == temComandStr) || (temStr2 == temComandStr)){
             if(myCommand[ccm].RunFunction) myCommand[ccm].RunFunction(_commands_, ccm, p_printer___);
             if((ccm == _COMMAND_ID_SET_ON_POS_) || (ccm == _COMMAND_ID_SET_OFF_POS_) ||

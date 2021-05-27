@@ -5,7 +5,6 @@
 #include "EepromManager.h"
 #import "src/Communication/CommandLine.h"
 #import "src/DS3231RTC/DS3232RTC.h"
-// #import "src/Debug/ArduinoTrace.h"
 
 DS3232RTC myRTC;
 
@@ -28,24 +27,27 @@ void runTestCount(){
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  // ResetEeprom_ServoInfo();// Only use for the First time
+  ResetEeprom_ServoInfo();// Only use for the First time
 
   SetUpPinServo(currentLed7SegServo.servoInfo);
   
-  //  myRTC.begin();
+   myRTC.begin();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   ReadSerial();
   runTestCount();
-  // display();
+  display();
 }
 
 void ReadSerial(){
   if(Serial.available()){
     String kk = Serial.readStringUntil('\n');
     Serial.println(kk);
+    Serial.println(getNumchar(kk.toInt(),0));
+    Serial.println(getNumchar(kk.toInt(),1));
+    Serial.println(getNumchar(kk.toInt(),2));
     CheckCommand(kk, &Serial);
 
   }
@@ -67,5 +69,22 @@ void display()
     Serial.print("C ");
     Serial.print(fahrenheit);
     Serial.println("F");
+
+    // long x;
+    //  x = 4321789;
+     
+    //  printf("\n Chu so hang nghin cua %l la : %l", x, x/1000%10);
+    //  printf("\n Chu so hang tram cua %l la : %l", x, x/100%10);
+    //  printf("\n Chu so hang chuc cua %l la : %l", x, (x%100)/10);
+    //  printf("\n Chu so hang don vi cua %l la : %l", x, (x%100)%10);
   }
+}
+
+int getNumchar(unsigned long value, int pos){
+    unsigned long temvalue = value;
+    
+    for(int cf = 0; cf < pos; cf++){
+        temvalue/=10;
+    }
+    return temvalue%=10;
 }
